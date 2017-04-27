@@ -31,6 +31,9 @@
   "devDependencies": {
     "dependency-check": "^2.7.0",
     "gl-react-dom": "^3.0.0-alpha.8",
+    "insert-css": "^2.0.0",
+    "ndarray": "^1.0.18",
+    "ndpixels-convert": "^1.1.0",
     "npm-run-all": "^4.0.1",
     "nyc": "^10.1.2",
     "pull-stream": "^3.5.0",
