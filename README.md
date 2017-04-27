@@ -8,7 +8,10 @@ npm install --save pixels-gl
 
 ## example
 
+[baboon/mandrill test image](https://github.com/scijs/baboon-image)
+
 ```js
+// example-baboon.js
 const h = require('react-hyperscript')
 const { render } = require('react-dom')
 const { Surface } = require('gl-react-dom')
@@ -22,6 +25,11 @@ render(
   document.querySelector('.main')
 )
 ```
+
+or a scrolling rainbow 
+
+- [demo](http://dinosaur.is/pixels-gl/)
+- [source](./example.js)
 
 ## usage
 
