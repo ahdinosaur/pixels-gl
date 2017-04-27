@@ -1,6 +1,5 @@
 const h = require('react-hyperscript')
 const { render } = require('react-dom')
-const { NearestCopy, LinearCopy } = require('gl-react')
 const { Surface } = require('gl-react-dom')
 const rainbowPixels = require('rainbow-pixels')
 const pull = require('pull-stream')
@@ -23,8 +22,8 @@ insertCss(`
 `)
 
 const size = {
-  width: document.body.clientWidth,
-  height: document.body.clientHeight,
+  width: 512, //document.body.clientWidth,
+  height: 512 //document.body.clientHeight
 }
 
 console.log('size', size)
