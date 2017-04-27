@@ -1,14 +1,37 @@
 # pixels-gl
 
-render pixels with webgl
+render pixels with webgl using [`gl-react`](https://github.com/gre/gl-react)
 
 ```shell
 npm install --save pixels-gl
 ```
 
+## example
+
+```js
+const h = require('react-hyperscript')
+const { render } = require('react-dom')
+const { Surface } = require('gl-react-dom')
+const Pixels = require('pixels-gl')
+const image = require('baboon-image')
+
+render(
+  h(Surface, [
+    h(Pixels, { pixels: image })
+  ]),
+  document.querySelector('.main')
+)
+```
+
 ## usage
 
-### `pixelsGl = require('pixels-gl')`
+### `Pixels = require('pixels-gl')`
+
+### `<Pixels pixels={pixels} />`
+
+pixels is an [`ndarray`](https://github.com/scijs/ndarray) for pixels (aka [`ndpixels`](https://github.com/livejs/ndpixels))
+
+to get pixels from a url, see [`get-pixels`](https://github.com/scijs/get-pixels).
 
 ## license
 

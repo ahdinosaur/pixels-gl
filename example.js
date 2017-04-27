@@ -6,27 +6,14 @@ const pull = require('pull-stream')
 const convert = require('ndpixels-convert')
 const Ndarray = require('ndarray')
 const insertCss = require('insert-css')
-const pixelsGl = require('./')
-
-const main = document.createElement('div')
-main.className = 'main'
-document.body.appendChild(main)
-
-insertCss(`
-  html, body, .main, canvas {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }   
-`)
+const pullRaf = require('pull-raf')
+const PixelsGl = require('./')
 
 const size = {
-  width: 512, //document.body.clientWidth,
-  height: 512 //document.body.clientHeight
+  width: 512,
+  height: 512
 }
-
-console.log('size', size)
+const main = document.querySelector('.main')
 
 pull(
   pull.infinite(rainbowPixels({
@@ -36,15 +23,11 @@ pull(
   pull.map(pixels => {
     return Ndarray(Uint8Array.from(pixels.data), pixels.shape, pixels.stride)
   }),
-  pull.asyncMap((pixels, cb) => {
-    window.requestAnimationFrame(() => {
-      cb(null, pixels)
-    })
-  }),
-  pull.drain(pixels => {
+  pullRaf(),
+  pull.drain((pixels) => {
     render(
-      h(Surface, size, [
-        h(pixelsGl, { pixels })
+      h(Surface, [
+        h(PixelsGl, { pixels })
       ]),
       main
     )

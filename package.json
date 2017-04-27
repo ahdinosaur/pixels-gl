@@ -4,7 +4,11 @@
   "description": "render pixels with webgl",
   "main": "index.js",
   "scripts": {
-    "start": "budo example --live --open",
+    "start": "budo example -d --serve bundle.js --live",
+    "deploy": "npm run build && npm run dist && npm run push",
+    "build": "browserify example.js -o bundle.js -g uglifyify",
+    "dist": "mkdir -p dist && bash -c 'cp *.{js,html,css} dist'",
+    "push": "gh-pages -d dist",
     "test:deps": "dependency-check . && dependency-check . --extra --no-dev -i es2040",
     "test:lint": "standard",
     "test:node": "NODE_ENV=test run-default tape test/*.js --",
@@ -30,12 +34,14 @@
   "homepage": "https://github.com/ahdinosaur/pixels-gl#readme",
   "devDependencies": {
     "dependency-check": "^2.7.0",
-    "gl-react-dom": "^3.0.0-alpha.8",
+    "gl-react": "^3.0.0",
+    "gl-react-dom": "^3.0.0",
     "insert-css": "^2.0.0",
     "ndarray": "^1.0.18",
     "ndpixels-convert": "^1.1.0",
     "npm-run-all": "^4.0.1",
     "nyc": "^10.1.2",
+    "pull-raf": "^1.0.1",
     "pull-stream": "^3.5.0",
     "rainbow-pixels": "^5.0.0",
     "react": "^15.5.4",
@@ -46,7 +52,7 @@
   },
   "dependencies": {
     "es2040": "^1.2.3",
-    "gl-react": "^3.0.0-alpha.8",
+    "gl-react": "^3.0.0",
     "react-hyperscript": "^3.0.0"
   }
 }
