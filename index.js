@@ -1,41 +1,44 @@
-const Regl = require('regl')
-
 module.exports = pixelsGl
 
-function pixelsGl (options, cb) {
-  const regl = Regl(options)
-  const render = createRender(regl)
-
-  var pixels, nextPixels
-  regl.frame(frame => {
-    // clear contents of the drawing buffer
-    regl.clear({
-      pixels: null,
-      depth: 1
-    })
-
-    if (pixels === nextPixels) return
-    render({ pixels })
-    pixels = nextPixels
-  })
-
-  return ({ pixels }) => {
-    nextPixels = pixels
+function pixelsGl (regl) {
+  const render = regl(createRender(regl))
+  return options => {
+    const { pixels } = options
+    const texture = regl.texture(pixels)
+    return render({ texture })
   }
 }
 
+// source: https://github.com/regl-project/regl/blob/gh-pages/example/texture.js
 function createRender (regl) {
   return {
     frag: `
       precision highp float;
+      uniform sampler2D texture;
       varying vec2 uv;
-      uniform sampler2D pixels;
       void main() {
-        gl_FragColor = texture2D(pixels, uv);
+        gl_FragColor = texture2D(texture, uv);
       }
     `,
-    uniform: {
-      pixels: regl.prop('pixels')
-    }
+    vert: `
+      precision mediump float;
+      attribute vec2 position;
+      varying vec2 uv;
+      void main () {
+        uv = position;
+        gl_Position = vec4(1.0 - 2.0 * position, 0, 1);
+      }
+    `,
+    attributes: {
+      position: [
+        -2, 0,
+        0, -2,
+        2, 2
+      ]
+    },
+    uniforms: {
+      texture: regl.prop('texture')
+    },
+    count: 3
   }
 }

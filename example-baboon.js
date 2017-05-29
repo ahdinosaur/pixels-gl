@@ -1,12 +1,10 @@
-const h = require('react-hyperscript')
-const { render } = require('react-dom')
-const { Surface } = require('gl-react-dom')
-const Pixels = require('./')
+const Regl = require('regl')
 const image = require('baboon-image')
+const PixelsGl = require('./')
 
-render(
-  h(Surface, [
-    h(Pixels, { pixels: image })
-  ]),
-  document.querySelector('.main')
-)
+const regl = Regl()
+const pixelsGl = PixelsGl(regl)
+
+regl.frame(({ time }) => {
+  pixelsGl({ pixels: image })
+})

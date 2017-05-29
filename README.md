@@ -1,6 +1,6 @@
 # pixels-gl
 
-render pixels with webgl using [`gl-react`](https://github.com/gre/gl-react)
+render pixels with webgl using [`regl`](https://github.com/regl-project/regl)
 
 ```shell
 npm install --save pixels-gl
@@ -12,18 +12,16 @@ npm install --save pixels-gl
 
 ```js
 // example-baboon.js
-const h = require('react-hyperscript')
-const { render } = require('react-dom')
-const { Surface } = require('gl-react-dom')
-const Pixels = require('pixels-gl')
+const Regl = require('regl')
 const image = require('baboon-image')
+const PixelsGl = require('pixels-gl')
 
-render(
-  h(Surface, [
-    h(Pixels, { pixels: image })
-  ]),
-  document.querySelector('.main')
-)
+const regl = Regl()
+const pixelsGl = PixelsGl(regl)
+
+regl.frame(({ time }) => {
+  pixelsGl({ pixels: image })
+})
 ```
 
 or a scrolling rainbow 
@@ -33,9 +31,13 @@ or a scrolling rainbow
 
 ## usage
 
-### `Pixels = require('pixels-gl')`
+### `PixelsGl = require('pixels-gl')`
 
-### `<Pixels pixels={pixels} />`
+### `pixelsGl = PixelsGl({ regl })`
+
+`regl` is an instance of [`require('regl')()`](https://github.com/regl-project/regl/blob/gh-pages/API.md#initialization)
+
+### `pixelsGl({ pixels })`
 
 pixels is an [`ndarray`](https://github.com/scijs/ndarray) for pixels (aka [`ndpixels`](https://github.com/livejs/ndpixels))
 
