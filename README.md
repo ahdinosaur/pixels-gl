@@ -13,15 +13,13 @@ npm install --save pixels-gl
 ```js
 // example-baboon.js
 const Regl = require('regl')
-const image = require('baboon-image')
 const PixelsGl = require('pixels-gl')
+const pixels = require('baboon-image')
 
 const regl = Regl()
 const pixelsGl = PixelsGl(regl)
 
-regl.frame(({ time }) => {
-  pixelsGl({ pixels: image })
-})
+pixelsGl({ pixels })
 ```
 
 or a scrolling rainbow 

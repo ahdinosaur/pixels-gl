@@ -1,10 +1,8 @@
 const Regl = require('regl')
-const image = require('baboon-image')
 const PixelsGl = require('./')
+const pixels = require('baboon-image')
 
 const regl = Regl()
 const pixelsGl = PixelsGl(regl)
 
-regl.frame(({ time }) => {
-  pixelsGl({ pixels: image })
-})
+pixelsGl({ pixels })
