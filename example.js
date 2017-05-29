@@ -1,6 +1,3 @@
-const h = require('react-hyperscript')
-const { render } = require('react-dom')
-const { Surface } = require('gl-react-dom')
 const rainbowPixels = require('rainbow-pixels')
 const pull = require('pull-stream')
 const convert = require('ndpixels-convert')
@@ -14,6 +11,7 @@ const size = {
   height: 512
 }
 const main = document.querySelector('.main')
+const pixelsGl = PixelsGl({ container: main })
 
 pull(
   pull.infinite(rainbowPixels({
@@ -24,12 +22,5 @@ pull(
     return Ndarray(Uint8Array.from(pixels.data), pixels.shape, pixels.stride)
   }),
   pullRaf(),
-  pull.drain((pixels) => {
-    render(
-      h(Surface, [
-        h(PixelsGl, { pixels })
-      ]),
-      main
-    )
-  })
+  pull.drain(pixelsGl)
 )
