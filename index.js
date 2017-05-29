@@ -9,7 +9,7 @@ function pixelsGl (regl) {
   }
 }
 
-// source: https://github.com/regl-project/regl/blob/gh-pages/example/texture.js
+// source: https://github.com/regl-project/regl/blob/27d147723565c68821e911e24fc5c7c33296f66e/test/texture-simple.js
 function createRender (regl) {
   return {
     frag: `
@@ -25,15 +25,15 @@ function createRender (regl) {
       attribute vec2 position;
       varying vec2 uv;
       void main () {
-        uv = position;
-        gl_Position = vec4(1.0 - 2.0 * position, 0, 1);
+        uv = 0.5 * (1.0 + position);
+        gl_Position = vec4(position, 0, 1);
       }
     `,
     attributes: {
       position: [
-        -2, 0,
-        0, -2,
-        2, 2
+        -4, 4,
+        4, 4,
+        0, -4
       ]
     },
     uniforms: {
