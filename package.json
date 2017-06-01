@@ -33,28 +33,23 @@
   },
   "homepage": "https://github.com/ahdinosaur/pixels-gl#readme",
   "devDependencies": {
+    "budo": "^10.0.3",
     "dependency-check": "^2.7.0",
     "gh-pages": "^0.12.0",
-    "gl-react": "^3.0.0",
-    "gl-react-dom": "^3.0.0",
     "insert-css": "^2.0.0",
     "ndarray": "^1.0.18",
     "ndpixels-convert": "^1.1.0",
     "npm-run-all": "^4.0.1",
     "nyc": "^10.1.2",
-    "pull-raf": "^1.0.1",
-    "pull-stream": "^3.5.0",
     "rainbow-pixels": "^5.0.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "regl": "^1.3.0",
     "run-default": "^1.0.0",
     "standard": "^8.6.0",
     "tape": "^4.6.3",
-    "uglifyify": "^3.0.4"
+    "uglifyify": "^3.0.4",
+    "value-pipe": "^1.0.0"
   },
   "dependencies": {
-    "es2040": "^1.2.3",
-    "gl-react": "^3.0.0",
-    "react-hyperscript": "^3.0.0"
+    "es2040": "^1.2.3"
   }
 }
