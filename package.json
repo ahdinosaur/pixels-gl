@@ -1,6 +1,6 @@
 {
   "name": "pixels-gl",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "render pixels with webgl",
   "main": "index.js",
   "scripts": {
